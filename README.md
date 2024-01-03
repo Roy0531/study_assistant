@@ -4,7 +4,7 @@ A simple flashcard web application with a dashboard that allows users to visuall
 ## Sample Images
 
 #### Dashboard
-<img width="938" alt="image" style='width: 800px; height: 600px' src="https://github.com/Roy0531/study_assistant/assets/67287621/d493492b-6a9e-49af-ba1f-2dc9c2f7f7a2">
+<img width="938" alt="image" style='width: 600px; height: 400px' src="https://github.com/Roy0531/study_assistant/assets/67287621/d493492b-6a9e-49af-ba1f-2dc9c2f7f7a2">
 
 #### Deck page
 <img width="942" alt="image" src="https://github.com/Roy0531/study_assistant/assets/67287621/81ef7cc2-bc93-4627-9426-1f8c45d1dd5e">
