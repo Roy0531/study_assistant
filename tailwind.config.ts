@@ -39,6 +39,9 @@ const config: Config = {
         'bad': '#FF8B8B',
         'good': '#82D885',
         'perfect': '#6A8BFF',
+        'bad-hover': '#D75B5B',
+        'good-hover': '#53A957',
+        'perfect-hover': '#4C6AD4',
       }
     },
   },

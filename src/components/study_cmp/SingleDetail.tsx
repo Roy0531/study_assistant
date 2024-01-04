@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 
 type Props = {
     title: string;
-    value: string;
+    value?: string;
     unit?: string;
     className?: string;
 }

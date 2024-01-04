@@ -15,7 +15,7 @@ export default function FlashcardForm({ deckId }: Props) {
     return (
         <div>
             <div className='flex justify-end'>
-                <Button color='bg-primary' value={showForm ? 'Close' : 'Create'} className='hover:bg-primary-hover'
+                <Button color='bg-primary' value={showForm ? 'Close' : 'Create New'} className='hover:bg-primary-hover'
                 handleFunction={() => setShowForm(!showForm)}/>
             </div>
             {showForm && ( 

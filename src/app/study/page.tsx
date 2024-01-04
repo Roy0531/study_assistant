@@ -8,9 +8,9 @@ import prisma from '../../../lib/prisma'
 type DeckProps = {
     title: string;
     deck_id: number;
-    // card_number: number;
-    // last_date: Date;
-    // next_date: Date;
+    // mastery: number;
+    last_review_date?: Date;
+    next_review_date?: Date;
 }
 
 export default async function Study() {
@@ -27,7 +27,12 @@ export default async function Study() {
             <ul className='mx-10 my-6'>
                 {decks?.map((deck:DeckProps) => (
                     <li key={deck.deck_id}>
-                        <Deck deckName={deck.title} deck_id={deck.deck_id} withButtons={true}/>
+                        <Deck 
+                        deckName={deck.title} 
+                        deck_id={deck.deck_id} 
+                        withButtons={true} 
+                        last_review_date={deck.last_review_date ? String(deck.last_review_date) : 'Not reviewed'} 
+                        next_review_date={deck.next_review_date ? String(deck.next_review_date) : 'Not reviewed'}/>
                     </li>
                 ))}
             </ul>

@@ -10,10 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//get the lastly recorded mastery from masteryTracking
 model Deck {
   deck_id    Int      @id @default(autoincrement())
   title      String
   created_at DateTime @default(now())
+  last_review_date DateTime?
+  next_review_date DateTime?
   cards      Card[]
   masteryTracking MasteryTracking[]
   schedule Schedule?
@@ -24,9 +27,9 @@ model Card {
   front_content    String
   back_content     String
   created_at       DateTime @default(now())
-  last_review_date DateTime
+  last_review_date DateTime?
   count            Int
-  confidence_level String
+mastery          Float
   priority         Int
   deck_id          Int
   deck             Deck     @relation(fields: [deck_id], references: [deck_id])

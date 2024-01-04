@@ -6,7 +6,10 @@ import Deck from '@/components/study_cmp/Deck'
 import FlashcardForm from '@/components/study_cmp/FlashcardForm'
 import { dateConversion } from "@/utils/dateProcess";
 import FlashCard from '@/components/study_cmp/FlashCard'
+import Link from 'next/link';
 import prisma from '../../../../lib/prisma'
+import Button from '@/components/Button'
+
 
 type CardProps = {
     card_id: number;
@@ -28,16 +31,19 @@ export default async function Flashcards({ params }: {
 
     return (
         <Container className='flex flex-col justify-center bg-backgound'>
-            <div className='mx-auto mt-8'>
-                <Deck deckName='AI Concept' withButtons={false}/> 
-            </div>
-            <div className='flex items-center justify-center gap-4 mx-14'>
-                    <p className='text-xs underline underline-offset-1'>Mastery Criteria</p>
-                    <p className='text-[10px] text-white rounded-full py-0.5 px-4 bg-bad'>Bad</p>
-                    <p className='text-[10px] text-white rounded-full py-0.5 px-4 bg-good'>Good</p>
-                    <p className='text-[10px] text-white rounded-full py-0.5 px-4 bg-perfect'>Perfect</p>
-            </div>
+            {/* <div className='mx-auto mt-8'>
+                <Deck deckName='AI Concept' withButtons={false} deck_id={Number(params.deckId)}/> 
+            </div> */}
             <FlashcardForm deckId={params.deckId}/>
+            <div className='flex justify-end mt-2'>
+                <Button color='bg-primary' value={<Link href={{
+                    pathname:`/study/${params.deckId}/review`,
+                    query:{
+                        deckId: params.deckId,
+                    }
+                }}>Review</Link>}
+                className=' hover:bg-primary-hover'/>
+            </div>
             <ul className='mx-10 mb-6'>
                 {cards?.map((card:CardProps) => (
                     <li key={card.card_id}>
@@ -48,7 +54,8 @@ export default async function Flashcards({ params }: {
                             count={card.count}
                             //Todo: replace with the actual value
                             next_date={"card.next_date"}
-                            confidence={"card.confidence"}/>
+                            confidence={"card.confidence"}
+                            showOption={true}/>
                     </li>
                 ))}
             </ul>

@@ -4,14 +4,15 @@ import Button from '@/components/Button'
 import { addDeck } from '@/actions/add-deck-action'
 import { useRef, useState } from 'react'
 
-export default function Form() {
+
+export default function DeckForm() {
     const ref = useRef<HTMLFormElement>(null);
     const [showForm, setShowForm] = useState(false);
 
     return (
         <div>
             <div className='flex justify-end'>
-                <Button color='bg-primary' value={showForm ? 'Close' : 'Create'} className='hover:bg-primary-hover'
+                <Button color='bg-primary' value={showForm ? 'Close' : 'Create New'} className='hover:bg-primary-hover'
                 handleFunction={() => setShowForm(!showForm)}/>
             </div>
             {showForm && ( 
