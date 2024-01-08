@@ -19,7 +19,9 @@ type Navlink = {
 
 function NavLink({ href, icon, label, isExpanded }: Navlink) {
     const pathname  = usePathname();
-    const isActive = pathname===href ? true :  false;
+    const isActive = pathname.startsWith(href) ? true :  false;
+
+    
     return (
         <Link href={href} className={`mb-2 flex cursor-pointer rounded-xl  h-[60px] pb-0.5 duration-300
             ${isExpanded ? 'w-[160px] items-center pl-4' : 'flex-col w-[80px] items-center justify-center'} 

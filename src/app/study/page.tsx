@@ -9,12 +9,13 @@ type DeckProps = {
     title: string;
     deck_id: number;
     // mastery: number;
-    last_review_date?: Date;
-    next_review_date?: Date;
+    last_review_date: Date | null;
+    next_review_date: Date | null;
 }
 
 export default async function Study() {
     const decks = await prisma.deck.findMany();
+    
     const deckCount = await prisma.deck.count();
     
     return (
@@ -25,16 +26,23 @@ export default async function Study() {
             </div>
             <DeckForm />
             <ul className='mx-10 my-6'>
-                {decks?.map((deck:DeckProps) => (
-                    <li key={deck.deck_id}>
-                        <Deck 
-                        deckName={deck.title} 
-                        deck_id={deck.deck_id} 
-                        withButtons={true} 
-                        last_review_date={deck.last_review_date ? String(deck.last_review_date) : 'Not reviewed'} 
-                        next_review_date={deck.next_review_date ? String(deck.next_review_date) : 'Not reviewed'}/>
-                    </li>
-                ))}
+                {decks?.length > 0 ? (
+                    decks.map((deck: DeckProps) => (
+                        <li key={deck.deck_id}>
+                            <Deck 
+                                deckName={deck.title} 
+                                deck_id={deck.deck_id} 
+                                withButtons={true} 
+                                last_review_date={deck.last_review_date ? String(deck.last_review_date) : 'Not reviewed'} 
+                                next_review_date={deck.next_review_date ? String(deck.next_review_date) : 'Not reviewed'}
+                            />
+                        </li>
+                    ))
+                ) : (
+                    <div className='text-center'>
+                        <p className='font-bold'>No Decks has been Created</p>
+                    </div>
+                )}
             </ul>
         </Container>
     )

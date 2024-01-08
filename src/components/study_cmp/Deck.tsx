@@ -21,6 +21,17 @@ export default async function Deck({deckName, deck_id, withButtons, last_review_
         },
     });
 
+    const mastery = await prisma.masteryTracking.findFirst({
+        where: {
+            deck_id: deck_id,
+        },
+        orderBy: {
+            timestamp: 'desc',
+        },
+    });
+
+    
+
     return (
         <div className='flex justify-between px-2 pb-3 mb-6 border-b-2 border-nav-edge'>
             <p className='flex items-center font-bold mr-16 ml-4'>
@@ -28,7 +39,7 @@ export default async function Deck({deckName, deck_id, withButtons, last_review_
                 {deckName}
             </p>
             <div className='flex'>
-                <SingleDetail title='Mastery' value='40' unit='%' className='border-l px-5'/>
+                <SingleDetail title='Mastery' value={String(mastery?.mastery)} unit='%' className='border-l px-5'/>
                 {last_review_date === 'Not reviewed' ? (
                     <SingleDetail title='Last reviewed' value='Not reviewed' className='border-l px-5'/>
                 ) : (
@@ -41,7 +52,6 @@ export default async function Deck({deckName, deck_id, withButtons, last_review_
                     className='hover:bg-primary-hover'/>
                 </div>}
             </div>
-            
         </div>
     )
 }

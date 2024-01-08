@@ -9,12 +9,12 @@ type Props = {
     back: string;
     date_added?: string;
     count?: number;
-    next_date?: string;
+    last_review_date?: string;
     confidence?: string;
     showOption: boolean;
 }
 
-export default function FlashCard({front, back, date_added, count, next_date, confidence, showOption}: Props) {
+export default function FlashCard({front, back, date_added, count, last_review_date, confidence, showOption}: Props) {
     const [isFlipped, setIsFlipped] = useState(false);
 
     function flipCard() {
@@ -35,7 +35,7 @@ export default function FlashCard({front, back, date_added, count, next_date, co
             </ReactCardFlip>
             {showOption && <div className='flex flex-col justify-between mx-auto my-4'>
                 <SingleDetail title='Added on' value={date_added} className='border-b'/>
-                <SingleDetail title='Last reviewed on' value={next_date} className='border-b'/>
+                <SingleDetail title='Last reviewed on' value={last_review_date} className='border-b'/>
                 <SingleDetail title='No. reviewed' value={String(count)} unit='times' className='border-b'/>
                 <SingleDetail title='Confidence' value={confidence} className='border-b'/>
             </div>}
