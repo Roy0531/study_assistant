@@ -16,7 +16,7 @@ export const addFlashcard = async ({ formData, deckId } : FlashcardActionProp) =
             created_at: new Date(),
             last_review_date: new Date(),
             count: 0,
-            confidence_level: '100',
+            confidence: 'Bad',
             priority: 0,
             deck_id: Number(deckId),
         },

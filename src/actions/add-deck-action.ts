@@ -15,6 +15,9 @@ export const addDeck = async (formData: FormData) => {
                     due_date: new Date(formData.get("date") as string),
                 },
             },
+            masteryTracking: {
+                create: {},
+            },
         },
     });
 
