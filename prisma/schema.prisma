@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//get the lastly recorded mastery from masteryTracking
 model Deck {
   deck_id    Int      @id @default(autoincrement())
   title      String
@@ -27,9 +23,9 @@ model Card {
   front_content    String
   back_content     String
   created_at       DateTime @default(now())
-  last_review_date DateTime?
+  last_review_date DateTime
   count            Int
-mastery          Float
+  confidence       String
   priority         Int
   deck_id          Int
   deck             Deck     @relation(fields: [deck_id], references: [deck_id])
@@ -37,8 +33,8 @@ mastery          Float
 
 model MasteryTracking {
   tracking_id Int      @id @default(autoincrement())
-  timestamp   DateTime
-  mastery     Float
+  timestamp   DateTime @default(now())
+  mastery     Float    @default(0)
   deck_id     Int
   deck        Deck     @relation(fields: [deck_id], references: [deck_id])
 }
