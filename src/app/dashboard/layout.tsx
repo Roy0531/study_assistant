@@ -44,13 +44,7 @@ export default async function DashboardLayout({
                 <div className="flex gap-4 w-1/2">
                     <div className="flex flex-col gap-2 w-1/2">
                         <CardPanel count={deckCount} text='in total' bg='bg-primary-light' color='text-primary' icon={<VscFolder className="w-12 h-12"/>}/>
-                        <CardPanel count={20} text='studying' bg='bg-primary-light' color='text-primary' icon={<VscFolder className="w-12 h-12"/>}/>
-                        <CardPanel count={20} text='mastered' bg='bg-primary-light' color='text-primary' icon={<VscFolder className="w-12 h-12"/>}/>
-                    </div>
-                    <div className="flex flex-col gap-2  w-1/2">
                         <CardPanel count={cardCount} text='in total' bg='bg-secondary-light' color='text-secondary' icon={<PiCardsLight className="w-12 h-12"/>}/>
-                        <CardPanel count={20} text='studying' bg='bg-secondary-light' color='text-secondary' icon={<PiCardsLight className="w-12 h-12"/>}/>
-                        <CardPanel count={20} text='mastered' bg='bg-secondary-light' color='text-secondary' icon={<PiCardsLight className="w-12 h-12"/>}/>
                     </div>
                 </div>
                 <Container className="flex-1 w-1/4">{timelinepanel}</Container>
