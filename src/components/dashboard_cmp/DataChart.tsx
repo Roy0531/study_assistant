@@ -26,7 +26,7 @@ ChartJS.register(
 );
 
 type DataChartProps = {
-    deckId : number | null;
+    deck_id : number | null;
 }
 
 const dateFormatOption: Intl.DateTimeFormatOptions = {
@@ -39,13 +39,13 @@ type MasterySetProps = {
     mastery: number | null;
 };
 
-export default function DataChart({ deckId }: DataChartProps) {
+export default function DataChart({ deck_id }: DataChartProps) {
     const [range, setRange] = useState(7);
     const [masterySets, setMasterySets] = useState<MasterySetProps[]>([]);
 
     useEffect(() => {
         const masteryData = async () => {
-            const masteryList = await getMastery({deckId, range});
+            const masteryList = await getMastery({deck_id, range});
             const masterySet: MasterySetProps[] = [];
             masteryList?.forEach((record) => {
                 const reviewedDate = new Date(record.timestamp).toLocaleDateString('en-US', dateFormatOption)
@@ -63,7 +63,7 @@ export default function DataChart({ deckId }: DataChartProps) {
         };
 
         masteryData();
-    }, [range, deckId])
+    }, [range, deck_id])
 
     const options = {
         maintainAspectRatio: false,
@@ -90,12 +90,12 @@ export default function DataChart({ deckId }: DataChartProps) {
         },
         ],
     };
-    console.log(data);
 
     return (
         <>
+            <p className="font-bold">Progress</p>
             <ChartTabs setRange={setRange} />
-            <div className="h-screen-60 md:h-screen-3/4 w-auto">
+            <div className="h-screen-60">
                 <Line options={options} data={data} />
             </div>
         </>

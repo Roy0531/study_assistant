@@ -1,20 +1,30 @@
-import React from 'react'
-import '@/styles/radicalProgressBar.css'
+import { useEffect, useState } from 'react';
+import '@/styles/radicalProgressBar.css';
+import { getMastery } from '@/actions/get-mastery-action';
+
 type Props = {
-    
     circularWidth: number;
-    masteredCardNo: number;
-    totalCardNo: number;
+    deck_id: number | null;
 }
 
-export default function RadialProgressBar({circularWidth, masteredCardNo, totalCardNo}: Props) {
-    const radius = 40
-    const percentage = Math.round((masteredCardNo / totalCardNo) * 100)
+export default function RadialProgressBar({circularWidth, deck_id}: Props) {
+    const [percentage, setPercentage] = useState(0);
+    const radius = 80
     const dashArray = radius * Math.PI * 2;
     const dashOffset = dashArray - (dashArray * percentage) / 200;
+    useEffect(() => {
+        const masteryData = async () => {
+            const mastery = await getMastery({deck_id: deck_id, range: 1});
+            if (mastery !== null) {
+                setPercentage(mastery[0].mastery)
+            }
+        }
+        masteryData();
+    },[deck_id])
+
     return (
         <>
-            <p className="text-[10px] font-bold self-start ml-16">Mastery</p>
+            <p className="text-[14px] font-bold mb-4">Mastery</p>
             <svg 
                 width={circularWidth}
                 height={circularWidth}
@@ -22,16 +32,16 @@ export default function RadialProgressBar({circularWidth, masteredCardNo, totalC
             >
                 <defs>
                     <linearGradient id='gradient'>
-                        <stop offset='10%' stop-color='#97DDF4'/>
-                        <stop offset='50%' stop-color='#50CBF2'/>
-                        <stop offset='100%' stop-color='#2B8BB5'/>
+                        <stop offset='10%' stopColor='#97DDF4'/>
+                        <stop offset='50%' stopColor='#50CBF2'/>
+                        <stop offset='100%' stopColor='#2B8BB5'/>
                     </linearGradient>
                 </defs>
 
                 <circle 
                     cx={circularWidth / 2} 
                     cy={circularWidth / 2} 
-                    strokeWidth='16px' 
+                    strokeWidth='30px' 
                     r={radius}
                     className="circle-background" 
                     transform={`rotate(180, ${circularWidth / 2} ${circularWidth / 2})`}
@@ -42,7 +52,7 @@ export default function RadialProgressBar({circularWidth, masteredCardNo, totalC
                 <circle 
                     cx={circularWidth / 2} 
                     cy={circularWidth / 2} 
-                    strokeWidth='16px' 
+                    strokeWidth='30px' 
                     r={radius}
                     className="circle-progress" 
                     strokeDasharray={dashArray}
@@ -51,11 +61,8 @@ export default function RadialProgressBar({circularWidth, masteredCardNo, totalC
                     stroke='url(#gradient)'
                 />
 
-                <text x='50%' y='45%' dy='0.3em' textAnchor='middle' className='circular-text'>
+                <text x='50%' y='45%' dy='0.9em' textAnchor='middle' className='circular-text'>
                     {percentage} %
-                </text>
-                <text x='55%' y='60%' dx='-0.8em' dy='0.8em' textAnchor='middle' className='mastery-text'>
-                    {masteredCardNo} / {totalCardNo} cards
                 </text>
             </svg>
         </>
