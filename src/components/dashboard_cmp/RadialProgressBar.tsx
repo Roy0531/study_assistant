@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import '@/styles/radicalProgressBar.css';
 import { getMastery } from '@/actions/get-mastery-action';
+import '@/styles/radicalProgressBar.css';
+import { useEffect, useState } from 'react';
 
 type Props = {
     circularWidth: number;

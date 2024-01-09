@@ -1,7 +1,7 @@
 "use server"
 
-import prisma from '../../lib/prisma'
-import { revalidatePath } from "next/cache"
+import { revalidatePath } from "next/cache";
+import prisma from '../../lib/prisma';
 
 type FlashcardActionProp = {
     formData: FormData;
@@ -16,7 +16,7 @@ export const addFlashcard = async ({ formData, deck_id } : FlashcardActionProp) 
             created_at: new Date(),
             last_review_date: new Date(),
             count: 0,
-            confidence: 'Bad',
+            mastery: 0,
             priority: 0,
             deck_id: Number(deck_id),
         },

@@ -1,11 +1,8 @@
-
 import { getMastery } from "@/actions/get-mastery-action";
-import { useEffect, useState } from "react";
-import { FiTrendingUp, FiTrendingDown } from "react-icons/fi";
-import { MdOutlineTrendingFlat } from "react-icons/md";
 import { differenceInDays } from 'date-fns';
-
-type trending = "up" | "flat" | "down";
+import { useEffect, useState } from "react";
+import { FiTrendingDown, FiTrendingUp } from "react-icons/fi";
+import { MdOutlineTrendingFlat } from "react-icons/md";
 
 type Props = {
   deck_id: number | null;

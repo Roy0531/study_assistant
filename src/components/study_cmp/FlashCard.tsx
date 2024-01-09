@@ -1,8 +1,8 @@
 'use client'
 
-import ReactCardFlip from 'react-card-flip'
+import { useState } from 'react';
+import ReactCardFlip from 'react-card-flip';
 import SingleDetail from './SingleDetail';
-import { useState } from 'react'
 
 type Props = {
     front: string;
@@ -10,11 +10,11 @@ type Props = {
     date_added?: string;
     count?: number;
     last_review_date?: string;
-    confidence?: string;
+    mastery?: number;
     showOption: boolean;
 }
 
-export default function FlashCard({front, back, date_added, count, last_review_date, confidence, showOption}: Props) {
+export default function FlashCard({front, back, date_added, count, last_review_date, mastery, showOption}: Props) {
     const [isFlipped, setIsFlipped] = useState(false);
 
     function flipCard() {
@@ -37,7 +37,7 @@ export default function FlashCard({front, back, date_added, count, last_review_d
                 <SingleDetail title='Added on' value={date_added} className='border-b'/>
                 <SingleDetail title='Last reviewed on' value={last_review_date} className='border-b'/>
                 <SingleDetail title='No. reviewed' value={String(count)} unit='times' className='border-b'/>
-                <SingleDetail title='Confidence' value={confidence} className='border-b'/>
+                <SingleDetail title='Mastery' value={String(mastery)} unit='%' className='border-b'/>
             </div>}
         </div>
     )

@@ -1,19 +1,19 @@
 "use client";
 
-import { getMastery } from '@/actions/get-mastery-action'
-import { useEffect, useState } from 'react';
-import ChartTabs from "@/components/dashboard_cmp/ChartTabs"
-import { Line } from 'react-chartjs-2';
+import { getMastery } from '@/actions/get-mastery-action';
+import ChartTabs from "@/components/dashboard_cmp/ChartTabs";
 import {
-    Chart as ChartJS,
     CategoryScale,
+    Chart as ChartJS,
+    Legend,
+    LineElement,
     LinearScale,
     PointElement,
-    LineElement,
     Title,
     Tooltip,
-    Legend,
 } from 'chart.js';
+import { useEffect, useState } from 'react';
+import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
     CategoryScale,

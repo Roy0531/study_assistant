@@ -8,43 +8,42 @@ datasource db {
 }
 
 model Deck {
-  deck_id    Int      @id @default(autoincrement())
-  title      String
-  created_at DateTime @default(now())
-  last_review_date DateTime?
-  next_review_date DateTime?
-  cards      Card[]
-  masteryTracking MasteryTracking[]
-  schedule Schedule?
+  deck_id           Int      @id @default(autoincrement())
+  title             String
+  created_at        DateTime @default(now())
+  last_review_date  DateTime?
+  cards             Card[]
+  masteryTracking   MasteryTracking[]
+  schedule          Schedule?
 }
 
 model Card {
-  card_id          Int      @id @default(autoincrement())
-  front_content    String
-  back_content     String
-  created_at       DateTime @default(now())
-  last_review_date DateTime
-  count            Int
-  confidence       String
-  priority         Int
-  deck_id          Int
-  deck             Deck     @relation(fields: [deck_id], references: [deck_id])
+  card_id           Int      @id @default(autoincrement())
+  front_content     String
+  back_content      String
+  created_at        DateTime @default(now())
+  last_review_date  DateTime
+  count             Int
+  mastery           Int
+  priority          Int
+  deck_id           Int
+  deck              Deck     @relation(fields: [deck_id], references: [deck_id])
 }
 
 model MasteryTracking {
-  tracking_id Int      @id @default(autoincrement())
-  timestamp   DateTime @default(now())
-  mastery     Float    @default(0)
-  deck_id     Int
-  deck        Deck     @relation(fields: [deck_id], references: [deck_id])
+  tracking_id       Int      @id @default(autoincrement())
+  timestamp         DateTime @default(now())
+  mastery           Float    @default(0)
+  deck_id           Int
+  deck              Deck?     @relation(fields: [deck_id], references: [deck_id])
 }
 
 model Schedule {
-  schedule_id Int      @id @default(autoincrement())
-  event_type  String
-  event_title String
-  due_date    DateTime
-  created_at  DateTime @default(now())
-  deck_id     Int      @unique
-  deck        Deck     @relation(fields: [deck_id], references: [deck_id])
+  schedule_id       Int      @id @default(autoincrement())
+  event_type        String
+  event_title       String
+  due_date          DateTime
+  created_at        DateTime @default(now())
+  deck_id           Int      @unique
+  deck              Deck     @relation(fields: [deck_id], references: [deck_id])
 }

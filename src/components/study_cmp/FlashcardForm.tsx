@@ -1,7 +1,7 @@
 'use client'
 
-import Button from '@/components/Button'
 import { addFlashcard } from '@/actions/add-flashcard-action'
+import Button from '@/components/Button'
 import { useRef, useState } from 'react'
 
 type Props = {

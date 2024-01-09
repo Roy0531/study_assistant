@@ -1,11 +1,11 @@
 "use server"
 
-import prisma from '../../lib/prisma'
-import { revalidatePath } from "next/cache"
+import { revalidatePath } from "next/cache";
+import prisma from '../../lib/prisma';
 
 
 export const addDeck = async (formData: FormData) => {
-    const decksData = await prisma.deck.create({
+    const deckData = await prisma.deck.create({
         data: {
             title: formData.get("title") as string,
             schedule: {
@@ -25,6 +25,6 @@ export const addDeck = async (formData: FormData) => {
 
     return {
         success: true,
-        decksData,
+        deckData,
     };
 }

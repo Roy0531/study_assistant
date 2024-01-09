@@ -1,15 +1,13 @@
 import Container from '@/components/Container';
 import FlashCard from "@/components/study_cmp/FlashCard";
-import prisma from '../../../../../lib/prisma';
-import Button from '@/components/Button';
-import Link from 'next/link';
 import UpdateStudyForm from "@/components/study_cmp/UpdateStudyForm";
+import prisma from '../../../../../lib/prisma';
 
 type StudyCardProps = {
     card_id: number;
     front_content: string;
     back_content: string;
-    confidence: string;
+    mastery: number;
 }
 
 export default async function Review({searchParams}:{
@@ -35,7 +33,7 @@ export default async function Review({searchParams}:{
                                 back={card.back_content}
                                 showOption={false}
                             />
-                            <UpdateStudyForm card_id={ card.card_id } confidence={card.confidence} deck_id={Number(searchParams.deck_id)}/>
+                            <UpdateStudyForm card_id={ card.card_id } deck_id={Number(searchParams.deck_id)}/>
                         </li>
                     ))}
                 </ul>

@@ -4,7 +4,6 @@ CREATE TABLE "Deck" (
     "title" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "last_review_date" TIMESTAMP(3),
-    "next_review_date" TIMESTAMP(3),
 
     CONSTRAINT "Deck_pkey" PRIMARY KEY ("deck_id")
 );
@@ -17,7 +16,7 @@ CREATE TABLE "Card" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "last_review_date" TIMESTAMP(3) NOT NULL,
     "count" INTEGER NOT NULL,
-    "confidence" TEXT NOT NULL,
+    "mastery" INTEGER NOT NULL,
     "priority" INTEGER NOT NULL,
     "deck_id" INTEGER NOT NULL,
 

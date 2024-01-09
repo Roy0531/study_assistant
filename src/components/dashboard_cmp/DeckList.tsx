@@ -43,13 +43,19 @@ export default function CheckList({ setDeck, decks }: CheckListProps) {
     return (
         <>
             <p className="text-[14px] font-bold mb-4">Registered Deck</p>
-            <ul className='h-[240px] overflow-y-auto'>
-                {decks?.map((deck:DeckProps) => (
-                    <li key={deck.deck_id}>
-                        <RadioItem title={deck.title} deck_id={deck.deck_id} handleCheck={handleCheck} selectedDeck={selectedDeck}/>
-                    </li>
-                ))}
-            </ul>
+            {decks?.length > 0 ? (
+                <ul className='h-[240px] overflow-y-auto'>
+                    {decks?.map((deck:DeckProps) => (
+                        <li key={deck.deck_id}>
+                            <RadioItem title={deck.title} deck_id={deck.deck_id} handleCheck={handleCheck} selectedDeck={selectedDeck}/>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <div className='text-center my-10'>
+                    <p className="text-xs font-bold">No deck registered!</p>
+                </div>
+            )}
         </>
     )
 }

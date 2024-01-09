@@ -1,8 +1,7 @@
 'use client'
 
-import { VscBell } from "react-icons/vsc";
 import { PiUserCircleLight } from "react-icons/pi";
-import Navbar from '@/components/Navbar'
+import { VscBell } from "react-icons/vsc";
 
 type Props = {}
 

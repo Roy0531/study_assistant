@@ -1,6 +1,6 @@
-import { RxDotFilled } from "react-icons/rx";
 import { dateConversion, daysLeftConversion } from "@/utils/dateProcess";
-import prisma from '../../../../lib/prisma'
+import { RxDotFilled } from "react-icons/rx";
+import prisma from '../../../../lib/prisma';
 
 type scheduleProps = {
     schedule_id: number;
@@ -12,7 +12,7 @@ type scheduleProps = {
 type SingleDueProps = {
     event: string;
     due: string;
-    daysLeft: number;
+    daysLeft: string;
     type: string;
 }
 
@@ -42,13 +42,19 @@ export default async function TimelinePanel() {
     return (
         <div className="px-4 py-2">
             <p className="font-bold  mb-4">Due Timeline</p>
-            <ul className='h-[220px] overflow-auto'>
-                {scheduleData?.map((schedule:scheduleProps) => (
-                    <li key={schedule.schedule_id}>
-                        <SingleDue event={schedule.event_title} due={dateConversion(schedule.due_date)} type={schedule.event_type} daysLeft={daysLeftConversion(schedule.due_date)}/>
-                    </li>
-                ))}
-            </ul>
+            {scheduleData?.length > 0 ? (
+                <ul className='h-[220px] overflow-auto'>
+                    {scheduleData?.map((schedule:scheduleProps) => (
+                        <li key={schedule.schedule_id}>
+                            <SingleDue event={schedule.event_title} due={dateConversion(schedule.due_date)} type={schedule.event_type} daysLeft={daysLeftConversion(schedule.due_date)}/>
+                        </li>
+                    ))}
+                </ul>
+            ):(
+                <div className='text-center my-10'>
+                    <p className="text-xs font-bold">No due comming up!</p>
+                </div>
+            )}
         </div>
     )
 }

@@ -2,8 +2,7 @@ const maxCount = 15;
 const maxMaxtery = 100;
 const maxHours = 720;
 
-function calculatePriority(count: number, mastery:number):number {
-    
+export function calculatePriority(count: number, mastery: number): number {
     let pWeigth = 0;
     let cWeight = 0;
 
@@ -26,7 +25,7 @@ function calculatePriority(count: number, mastery:number):number {
 
     const prioritylevel = 1 - (count * cWeight + mastery * pWeigth) / 100;
 
-    return prioritylevel
+    return prioritylevel;
 }
 
 
@@ -42,7 +41,7 @@ function calculateEffectiveness(count: number, hours: number): number {
 }
 
 
-function depricateMastery(count: number, mastery: number, lastReviewDate: Date){
+export function depricateMastery(count: number, mastery: number, lastReviewDate: Date){
     const now = new Date();
     const diff = now.getTime() - lastReviewDate.getTime();
     const hours = Math.round(diff / (1000 * 60 * 60));
@@ -70,15 +69,16 @@ function depricateMastery(count: number, mastery: number, lastReviewDate: Date){
     return newMastery;
 }
 
-function calculateMastery(confidence:string){
-    let newMastery = 0;
-    if (confidence === 'perfect') {
-        newMastery = 100; 
-    } else if (confidence === 'good') {
-        newMastery = 75; 
-    } else if (confidence === 'bad') {
-        newMastery = 50;
-    }
+// function calculateMastery(confidence: string){
+//     let newMastery = 0;
 
-    return newMastery;
-}
+//     if (confidence === 'perfect') {
+//         newMastery = 100; 
+//     } else if (confidence === 'good') {
+//         newMastery = 75; 
+//     } else if (confidence === 'bad') {
+//         newMastery = 50;
+//     }
+
+//     return newMastery;
+// }

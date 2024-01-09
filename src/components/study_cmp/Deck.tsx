@@ -1,6 +1,6 @@
-import React from 'react'
 import SingleDetail from './SingleDetail';
 // import OptionButton from './OptionBUtton';
+import { daysLeftConversion } from '@/utils/dateProcess';
 import { VscFolder } from "react-icons/vsc";
 import prisma from '../../../lib/prisma';
 
@@ -8,10 +8,9 @@ type Props = {
     title: string;
     deck_id: number;
     last_review_date:  Date | null;
-    next_review_date:  Date | null;
 }
 
-export default async function Deck({title, deck_id, last_review_date, next_review_date}: Props) {
+export default async function Deck({title, deck_id, last_review_date}: Props) {
     const cardCount = await prisma.card.count({
         where: {
             deck_id: Number(deck_id),
@@ -36,16 +35,11 @@ export default async function Deck({title, deck_id, last_review_date, next_revie
             <div className='flex'>
                 <SingleDetail title='Mastery' value={String(mastery?.mastery)} unit='%' className='border-l px-5'/>
                 {last_review_date ? (
-                    <SingleDetail title='Last reviewed' value={String(last_review_date)} unit='days ago' className='border-l px-5'/>
+                    <SingleDetail title='Last reviewed' value={daysLeftConversion(last_review_date)} unit='days ago' className='border-l px-5'/>
                 ) : (
                     <SingleDetail title='Last reviewed' value='Not reviewed' className='border-l px-5'/>
                 )}
                 <SingleDetail title='No.' value={String(cardCount)} unit='cards' className='border-l px-5'/>
-                {last_review_date ? (
-                    <SingleDetail title='Next review date' value={String(next_review_date)} unit='days ago' className='border-l px-5'/>
-                ) : (
-                    <SingleDetail title='Next review date' value='Not reviewed' className='border-l px-5'/>
-                )}
             </div>
         </div>
     )

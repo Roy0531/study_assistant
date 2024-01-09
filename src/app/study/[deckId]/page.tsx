@@ -1,14 +1,14 @@
 'use server'
 
-import React from 'react'
-import Container from '@/components/Container'
-import Deck from '@/components/study_cmp/Deck'
-import FlashcardForm from '@/components/study_cmp/FlashcardForm'
+import Button from '@/components/Button';
+import Container from '@/components/Container';
+import Deck from '@/components/study_cmp/Deck';
+import FlashCard from '@/components/study_cmp/FlashCard';
+import FlashcardForm from '@/components/study_cmp/FlashcardForm';
 import { dateConversion } from "@/utils/dateProcess";
-import FlashCard from '@/components/study_cmp/FlashCard'
 import Link from 'next/link';
-import prisma from '../../../../lib/prisma'
-import Button from '@/components/Button'
+import prisma from '../../../../lib/prisma';
+
 
 type CardProps = {
     card_id: number;
@@ -17,16 +17,14 @@ type CardProps = {
     count: number;
     created_at: Date;
     last_review_date: Date;
-    confidence: string;
+    mastery: number;
 }
 
 export default async function Flashcards({ searchParams }: {
     searchParams: { 
         deck_id: number,
         title: string,
-        // mastery: String(deck.mastery),
         last_review_date: string | null,
-        next_review_date: string | null,
     };
 }) {
 
@@ -43,7 +41,6 @@ export default async function Flashcards({ searchParams }: {
                     title={searchParams.title} 
                     deck_id={Number(searchParams.deck_id)}
                     last_review_date={searchParams.last_review_date ? new Date(searchParams.last_review_date) : null} 
-                    next_review_date={searchParams.next_review_date ? new Date(searchParams.next_review_date): null}
                 />
             </div>
             <FlashcardForm deck_id={Number(searchParams.deck_id)}/>
@@ -67,7 +64,7 @@ export default async function Flashcards({ searchParams }: {
                                     date_added={dateConversion(card.created_at)} 
                                     count={card.count}
                                     last_review_date={dateConversion(card.last_review_date)}
-                                    confidence={card.confidence}
+                                    mastery={card.mastery}
                                     showOption={true}/>
                             </li>
                         ))}

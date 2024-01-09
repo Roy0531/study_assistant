@@ -1,8 +1,8 @@
 'use client'
 
-import Button from '@/components/Button'
-import { addDeck } from '@/actions/add-deck-action'
-import { useRef, useState } from 'react'
+import { addDeck } from '@/actions/add-deck-action';
+import Button from '@/components/Button';
+import { useRef, useState } from 'react';
 
 
 export default function DeckForm() {

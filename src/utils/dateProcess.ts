@@ -10,5 +10,5 @@ export function daysLeftConversion(due_date: Date){
     const diffTime = Math.abs(due_date.getTime() - today.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    return diffDays;
+    return String(diffDays);
 }
