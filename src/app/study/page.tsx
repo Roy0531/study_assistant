@@ -1,8 +1,10 @@
 'use server'
 
+import Button from '@/components/Button'
 import Container from '@/components/Container'
-import DeckForm from '@/components/study_cmp/DeckForm'
 import Deck from '@/components/study_cmp/Deck'
+import DeckForm from '@/components/study_cmp/DeckForm'
+import Link from 'next/link'
 import prisma from '../../../lib/prisma'
 
 type DeckProps = {
@@ -15,7 +17,6 @@ type DeckProps = {
 
 export default async function Study() {
     const decks = await prisma.deck.findMany();
-    
     const deckCount = await prisma.deck.count();
     
     return (
@@ -28,14 +29,29 @@ export default async function Study() {
             <ul className='mx-10 my-6'>
                 {decks?.length > 0 ? (
                     decks.map((deck: DeckProps) => (
-                        <li key={deck.deck_id}>
-                            <Deck 
-                                deckName={deck.title} 
-                                deck_id={deck.deck_id} 
-                                withButtons={true} 
-                                last_review_date={deck.last_review_date ? String(deck.last_review_date) : 'Not reviewed'} 
-                                next_review_date={deck.next_review_date ? String(deck.next_review_date) : 'Not reviewed'}
-                            />
+                        <li key={deck.deck_id} className='flex items-center justify-between'>
+                            <div className='mr-6 w-full'>
+                                <Deck 
+                                    title={deck.title} 
+                                    deck_id={deck.deck_id} 
+                                    last_review_date={deck.last_review_date} 
+                                    next_review_date={deck.next_review_date}
+                                />
+                            </div>
+                            <Button 
+                                color='bg-primary' 
+                                value={<Link href={{
+                                    pathname:`/study/${deck.deck_id}`,
+                                    query: {
+                                        deck_id: deck.deck_id,
+                                        title: deck.title,
+                                        // mastery: String(deck.mastery),
+                                        last_review_date: deck.last_review_date ? String(deck.last_review_date) : null,
+                                        next_review_date: deck.next_review_date ? String(deck.next_review_date) : null,
+                                    },
+                            }}>Open</Link>}
+                        className='hover:bg-primary-hover mb-6'
+                    />
                         </li>
                     ))
                 ) : (

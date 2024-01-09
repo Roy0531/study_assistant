@@ -10,7 +10,6 @@ import Link from 'next/link';
 import prisma from '../../../../lib/prisma'
 import Button from '@/components/Button'
 
-
 type CardProps = {
     card_id: number;
     front_content: string;
@@ -21,43 +20,40 @@ type CardProps = {
     confidence: string;
 }
 
-export default async function Flashcards({ params }: {
-    params: { deckId: string };
+export default async function Flashcards({ searchParams }: {
+    searchParams: { 
+        deck_id: number,
+        title: string,
+        // mastery: String(deck.mastery),
+        last_review_date: string | null,
+        next_review_date: string | null,
+    };
 }) {
+
     const cards = await prisma.card.findMany({
         where: {
-            deck_id: Number(params.deckId),
+            deck_id: Number(searchParams.deck_id),
         },
     });
 
-    const deck = await prisma.deck.findFirst({
-        where: {
-            deck_id: Number(params.deckId),
-        },
-    });
-
-    if (!deck) {
-        return <p>Deck not found</p>;
-    }
     return (
         <Container className='flex flex-col justify-center bg-backgound'>
             <div className='mx-auto mt-8'>
                 <Deck
-                    deckName={deck.title} 
-                    deck_id={deck.deck_id} 
-                    withButtons={false} 
-                    last_review_date={deck.last_review_date ? String(deck.last_review_date) : 'Not reviewed'} 
-                    next_review_date={deck.next_review_date ? String(deck.next_review_date) : 'Not reviewed'}
+                    title={searchParams.title} 
+                    deck_id={Number(searchParams.deck_id)}
+                    last_review_date={searchParams.last_review_date ? new Date(searchParams.last_review_date) : null} 
+                    next_review_date={searchParams.next_review_date ? new Date(searchParams.next_review_date): null}
                 />
             </div>
-            <FlashcardForm deckId={params.deckId}/>
+            <FlashcardForm deck_id={Number(searchParams.deck_id)}/>
             {cards?.length > 0 ? (
                 <>
                     <div className='flex justify-end mt-2'>
                         <Button color='bg-primary' value={<Link href={{
-                            pathname:`/study/${params.deckId}/review`,
+                            pathname:`/study/${searchParams.deck_id}/review`,
                             query:{
-                                deckId: params.deckId,
+                                deck_id: searchParams.deck_id,
                             }
                         }}>Review</Link>}
                         className=' hover:bg-primary-hover'/>
@@ -82,6 +78,9 @@ export default async function Flashcards({ params }: {
                     <p className='font-bold'>No Cards has been Created</p>
                 </div>
             )}
+            <div className='mb-4'>
+                <Button color='bg-primary' className='m-auto' value={<Link href='/study'>Go back to deck page</Link>}/>
+            </div>
         </Container>
     )
 }

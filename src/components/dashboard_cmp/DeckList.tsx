@@ -42,8 +42,8 @@ export default function CheckList({ setDeck, decks }: CheckListProps) {
 
     return (
         <>
-            <p className="text-[10px] font-bold mb-4">Registered Deck</p>
-            <ul className='h-[240px] max-w-44 overflow-y-auto'>
+            <p className="text-[14px] font-bold mb-4">Registered Deck</p>
+            <ul className='h-[240px] overflow-y-auto'>
                 {decks?.map((deck:DeckProps) => (
                     <li key={deck.deck_id}>
                         <RadioItem title={deck.title} deck_id={deck.deck_id} handleCheck={handleCheck} selectedDeck={selectedDeck}/>
