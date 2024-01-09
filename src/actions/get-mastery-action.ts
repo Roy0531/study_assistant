@@ -3,20 +3,19 @@
 import prisma from '../../lib/prisma'
 
 type MasteryActionProp = {
-    deckId: number | null; 
+    deck_id: number | null; 
     range: number;
 }
 
-export const getMastery = async ({ deckId, range }: MasteryActionProp) => {
-    // Return null if deckId is null
-    if (deckId === null) {
+export const getMastery = async ({ deck_id, range }: MasteryActionProp) => {
+    if (deck_id === null) {
         return null;
     }
 
     // Fetch all records for the deck
     const allRecords = await prisma.masteryTracking.findMany({
         where: {
-            deck_id: deckId
+            deck_id: deck_id
         },
         orderBy: {
             timestamp: 'desc'

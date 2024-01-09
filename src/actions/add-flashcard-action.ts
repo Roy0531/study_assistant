@@ -5,10 +5,10 @@ import { revalidatePath } from "next/cache"
 
 type FlashcardActionProp = {
     formData: FormData;
-    deckId: string;
+    deck_id: number;
 }
 
-export const addFlashcard = async ({ formData, deckId } : FlashcardActionProp) => {
+export const addFlashcard = async ({ formData, deck_id } : FlashcardActionProp) => {
     const flashcardsData = await prisma.card.create({
         data: {
             front_content: formData.get("front") as string,
@@ -18,7 +18,7 @@ export const addFlashcard = async ({ formData, deckId } : FlashcardActionProp) =
             count: 0,
             confidence: 'Bad',
             priority: 0,
-            deck_id: Number(deckId),
+            deck_id: Number(deck_id),
         },
     });
 
