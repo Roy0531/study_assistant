@@ -8,7 +8,7 @@ Simple Flashcard application with study progress visualization
 2. Dashboard
    The Dashboard pages are divided into three sections, each of which provides users with useful information and visualized feedback on their learning progress. The Progress chart displays either week-long or month-long progress that the user has made on each deck. Users can choose which deck data to display, as well as the time range. The blue and yellow panels show how many decks and cards the user is currently studying. The Timeline panel displays upcoming events to which the user tied each deck during creation.
 
-## Tehc Stack
+## Tech Stack
 Next.js, React, TypeScript, PostgreSQL, Tailwind CSS
 
 ## The app images
