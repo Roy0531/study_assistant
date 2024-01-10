@@ -1,5 +1,3 @@
-'use server'
-
 import Button from '@/components/Button';
 import Container from '@/components/Container';
 import Deck from '@/components/study_cmp/Deck';
@@ -20,17 +18,18 @@ type CardProps = {
     mastery: number;
 }
 
-export default async function Flashcards({ searchParams }: {
-    searchParams: { 
-        deck_id: number,
-        title: string,
-        last_review_date: string | null,
-    };
-}) {
+export default async function Flashcards({ params }: { params: { deckId: string}}) {
 
+    const deck = await prisma.deck.findFirst(
+        {
+            where: {
+                deck_id: Number(params.deckId),
+            },
+        }
+    )
     const cards = await prisma.card.findMany({
         where: {
-            deck_id: Number(searchParams.deck_id),
+            deck_id: Number(params.deckId),
         },
     });
 
@@ -38,19 +37,19 @@ export default async function Flashcards({ searchParams }: {
         <Container className='flex flex-col justify-center bg-backgound'>
             <div className='mx-auto mt-8'>
                 <Deck
-                    title={searchParams.title} 
-                    deck_id={Number(searchParams.deck_id)}
-                    last_review_date={searchParams.last_review_date ? new Date(searchParams.last_review_date) : null} 
+                    title={deck!.title} 
+                    deck_id={Number(params.deckId)}
+                    last_review_date={deck?.last_review_date ? new Date(deck.last_review_date) : null} 
                 />
             </div>
-            <FlashcardForm deck_id={Number(searchParams.deck_id)}/>
+            <FlashcardForm deck_id={Number(params.deckId)}/>
             {cards?.length > 0 ? (
                 <>
                     <div className='flex justify-end mt-2'>
                         <Button color='bg-primary' value={<Link href={{
-                            pathname:`/study/${searchParams.deck_id}/review`,
+                            pathname:`/study/${params.deckId}/review`,
                             query:{
-                                deck_id: searchParams.deck_id,
+                                deck_id: params.deckId
                             }
                         }}>Review</Link>}
                         className=' hover:bg-primary-hover'/>
@@ -65,7 +64,8 @@ export default async function Flashcards({ searchParams }: {
                                     count={card.count}
                                     last_review_date={dateConversion(card.last_review_date)}
                                     mastery={card.mastery}
-                                    showOption={true}/>
+                                    showOption={true}
+                                />
                             </li>
                         ))}
                     </ul>

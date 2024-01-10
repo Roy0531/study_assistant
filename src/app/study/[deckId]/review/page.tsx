@@ -2,6 +2,8 @@ import Container from '@/components/Container';
 import FlashCard from "@/components/study_cmp/FlashCard";
 import UpdateStudyForm from "@/components/study_cmp/UpdateStudyForm";
 import prisma from '../../../../../lib/prisma';
+import Button from '@/components/Button';
+import Link from 'next/link';
 
 type StudyCardProps = {
     card_id: number;
@@ -12,9 +14,8 @@ type StudyCardProps = {
 
 export default async function Review({searchParams}:{
     searchParams: {
-        deck_id: number;
+        deck_id: string;
     };
-
 }){
     const cards = await prisma.card.findMany({
         where: {
@@ -37,11 +38,11 @@ export default async function Review({searchParams}:{
                         </li>
                     ))}
                 </ul>
-                
+                <div className='mb-4'>
+                    <Button color='bg-primary' className='m-auto' value={<Link href={`/study/${searchParams.deck_id}`}>Complete</Link>}/>
+                </div>
             </Container>
-            <div className='sticky bottom-10 '>
-                <button className=' bg-primary text-white rounded-full text-sm py-3 px-3'> Go Back to Deck Page</button>       
-            </div>
+            
         </>
     )
 }

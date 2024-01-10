@@ -40,7 +40,6 @@ export default async function Study() {
                             </div>
                             <Button 
                                 color='bg-primary' 
-                                // handleFunction={() => updateMastery(deck.deck_id)}
                                 value={<Link href={{
                                     pathname:`/study/${deck.deck_id}`,
                                     query: {
