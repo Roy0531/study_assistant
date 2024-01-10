@@ -1,6 +1,6 @@
 import { dateConversion, daysLeftConversion } from "@/utils/dateProcess";
 import { RxDotFilled } from "react-icons/rx";
-import prisma from '../../../../lib/prisma';
+import prisma from '../../../lib/prisma';
 
 type scheduleProps = {
     schedule_id: number;

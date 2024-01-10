@@ -6,7 +6,7 @@ export default async function ProgressPanel() {
     
     return (
         <>
-            <ProgressItems decks={decks}/>
+            <ProgressItems decks={decks} />
         </>
     )
 }

@@ -21,7 +21,9 @@ export default function RootLayout({
       <body className={openSans.className}>
         <div className="flex flex-col">
           <Navbar />
-          <main className='bg-drop-bg ml-[100px] min-h-screen py-6 px-10'>{children}</main>
+          <main className='bg-drop-bg ml-[100px] min-h-screen py-6 px-10'>
+            {children}
+          </main>
         </div>
       </body>  
     </html>

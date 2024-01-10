@@ -12,6 +12,7 @@ export default function RadialProgressBar({circularWidth, deck_id}: Props) {
     const radius = 80
     const dashArray = radius * Math.PI * 2;
     const dashOffset = dashArray - (dashArray * percentage) / 200;
+    
     useEffect(() => {
         const masteryData = async () => {
             const mastery = await getMastery({deck_id: deck_id, range: 1});
